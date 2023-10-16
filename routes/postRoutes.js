@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { isAuthanticated } from "../middleware/auth.js";
-import { addPost, deletePost, getAllPost, getPostById, getUserpost, patchPost } from "../controller/post.js";
+import { addPost, deletePost, getAllPost, getPostById, patchPost } from "../controller/post.js";
 
 const router=express.Router();
 
