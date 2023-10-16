@@ -87,9 +87,7 @@ export const getPostById=async(req,res)=>{
   
   }
 
-  export const getUserpost=async(req,res)=>{
-    
-  }
+
 
   export const deletePost=async(req,res)=>{
     const Id=parseInt(req.params.id);
