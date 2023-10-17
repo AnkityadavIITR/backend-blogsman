@@ -22,9 +22,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(cors({
-  origin:[process.env.FRONT_END_URI],
+  origin:process.env.FRONT_END_URI,
   credentials:true,
-  methods:["GET","PUT","POST","DELETE"]
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }))
 
 

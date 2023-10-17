@@ -22,12 +22,14 @@ export const addNewUser=async(req,res)=>{
     }
 
     try{
+        console.log(req.file);
         const file=req.file;
         const fileUri=getDataUri(file);
 
         //sending the file to cloud
         const mycloud=await cloudinary.uploader.upload(fileUri.content);
 
+        //bcryprting the password
         const hashedPassword= await bcrypt.hash(password,10);
         const newUser=await User.create({
             name:name,

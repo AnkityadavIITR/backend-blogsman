@@ -15,6 +15,9 @@ cloudinary.config({
   api_secret:process.env.CLOUDINARY_SECRET,
 })
 
+app.get("/",(req,res)=>{
+  res.send("api is working")
+})
 
 app.listen(process.env.PORT, () => {
   console.log(
