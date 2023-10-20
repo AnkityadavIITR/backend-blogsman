@@ -16,7 +16,7 @@ export const addNewUser=async(req,res)=>{
     console.log("user :",user);
     if(user?.email){
         return res.json({
-            success:"false",
+            success:false,
             message:"already account exist"
         })
     }
@@ -64,7 +64,7 @@ export const logUser=async(req,res)=>{
                 console.log("match");
                 const userWithPost= await User.findOne({_id:user._id});
                 sendCookies(res,userWithPost,"succefully login",200);
-            }else res.json({message:"incorrect password"});
+            }else res.json({success:false,message:"incorrect password"});
         }else{
             res.json({token:null});
         }
@@ -76,7 +76,7 @@ export const logUser=async(req,res)=>{
 export const getUserProfile=async(req,res)=>{
     const userWithPosts = await User.findOne({ _id: req.user._id }).populate('posts');
     res.status(200).json({
-        success:"true",
+        success:true,
         user:userWithPosts
     })
 }

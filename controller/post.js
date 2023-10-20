@@ -7,11 +7,11 @@ export const getAllPost=async (req,res)=>{
     try {
       const allPosts = await Post.find({});
       res.json({
-        success:"true",
+        success:true,
         posts:allPosts
       });
     } catch (error) {
-      res.status(500).json({ error: "Error fetching posts from the database" });
+      res.status(500).json({success:false, error: "Error fetching posts from the database" });
     }
 }
 
@@ -31,11 +31,15 @@ export const getPostById=async(req,res)=>{
         date:date
       }
       console.log(response);
-      res.json(response);
+      res.json({
+        success:true,
+        response
+      });
   
     }catch(err){
       console.log("error in getting");
-      res.json({error:"can't get"})
+      res.json({
+        success:false,error:"can't get"})
     }
   }
 
@@ -56,14 +60,14 @@ export const getPostById=async(req,res)=>{
       await userData.save();
       console.log(userData);
       
-      res.json({
+      res.status(201).json({
         success:true,
         message:"post created"
       })
     }catch(err){
       console.log(err);
       console.log("error in getting");
-      res.json({error:"can't get"})
+      res.json({success:false,error:"can't get"})
     }
   }
 
@@ -82,7 +86,7 @@ export const getPostById=async(req,res)=>{
         res.status(200).json({success:true,message:"success update"});
     }catch(err){
       console.log(err);
-      res.json({message:"can't patch, not available"})
+      res.json({success:false,message:"can't patch, not available"})
     }
   
   }
@@ -96,9 +100,9 @@ export const getPostById=async(req,res)=>{
        await Post.findOneAndDelete(
         {id:Id}
         );
-        res.status(200).json({message:"success update"});
+        res.status(200).json({success:true,message:"successfully deleted"});
     }catch(err){
       console.log(err);
-      res.json({message:"can't patch, not available"})
+      res.json({success:false,message:"can't delete, not available"})
     }
   }
