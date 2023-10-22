@@ -74,7 +74,19 @@ export const logUser=async(req,res)=>{
 }
 
 export const logout=async(req,res)=>{
-    res.cookie("token", null).json({success:true,message:"succesfully logout"})
+    res
+    .status(200)
+    .cookie("token", "", {
+      expires: new Date(Date.now()),
+      sameSite: process.env.NODE_ENV === "Develpoment" ? "lax" : "none",
+      secure: process.env.NODE_ENV === "Develpoment" ? false : true,
+    })
+    .json({
+      success: true,
+      user: req.user,
+      message:"logged out"
+    });
+
 }
 
 export const getUserProfile=async(req,res)=>{
