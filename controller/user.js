@@ -73,6 +73,10 @@ export const logUser=async(req,res)=>{
     }
 }
 
+export const logout=async(req,res)=>{
+    res.cookie("token", null).json({success:true,message:"succesfully logout"})
+}
+
 export const getUserProfile=async(req,res)=>{
     const userWithPosts = await User.findOne({ _id: req.user._id }).populate('posts');
     res.status(200).json({
