@@ -5,7 +5,7 @@ export const getAllPost=async (req,res)=>{
 
     //sending the store posts in bd
     try {
-      const allPosts = await Post.find({});
+      const allPosts = await Post.find({}).populate('user');
       res.json({
         success:true,
         posts:allPosts
