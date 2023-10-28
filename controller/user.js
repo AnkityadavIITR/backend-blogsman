@@ -51,7 +51,7 @@ export const logUser=async(req,res)=>{
     console.log("processing req");
     const {email,password}=req.body;
     try{
-        console.log("trying login");
+        // console.log("trying login");
         //not everyone can access the password we add the select to false in user schema in password section,
         //so herewe use ".select" to contain the password without logging
         const user=await User.findOne({email:email}).select("+password");
@@ -61,7 +61,7 @@ export const logUser=async(req,res)=>{
             //inside of sending token in json to forntend,
             // we can directly set the cookie from backend in user system but required jwt
             if(isMatch){
-                console.log("match");
+                // console.log("match");
                 const userWithPost= await User.findOne({_id:user._id});
                 sendCookies(res,userWithPost,"succefully login",200);
             }else res.json({success:false,message:"incorrect password"});

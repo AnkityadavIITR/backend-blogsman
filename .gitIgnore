@@ -5,3 +5,7 @@
 /views
 
 /googleauth.js
+/models/googleuser.js
+
+/routes/auth.js
+/utils/passport.js

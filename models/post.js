@@ -1,9 +1,27 @@
 import mongoose from "mongoose";
 
 const postSchema= new mongoose.Schema({
-    title:String,
-    content:String,
-    author:String,
+    title:{
+      type:String,
+      require:true
+    },
+    content:{
+      type:String,
+      require:true
+    },
+    photo:{
+        public_id:{
+            type:String,
+        },url:{
+            type:String,
+        }
+    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users', 
+      },
+    ],
     user:{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
@@ -12,7 +30,8 @@ const postSchema= new mongoose.Schema({
     date:{
       type:Date,
       default:Date.now()
-    }
+    },
+
   })
   
   
