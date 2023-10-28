@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routes/userRoutes.js"
 import postRouter from "./routes/postRoutes.js"
 import cors from "cors"
-import authRouter from "./routes/auth.js"
+
 import cookieSession from "cookie-session";
 
 import  "./utils/passport.js"

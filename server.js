@@ -2,7 +2,6 @@ import { app } from "./index.js";
 import { dbconnect } from "./data/database.js";
 import { config } from "dotenv";
 import {v2 as cloudinary} from "cloudinary"
-import passport from "passport";
 
 
 config({
