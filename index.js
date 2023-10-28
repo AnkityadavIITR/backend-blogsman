@@ -9,11 +9,11 @@ import cors from "cors"
 
 import cookieSession from "cookie-session";
 
-import  "./utils/passport.js"
+// import  "./utils/passport.js"
+// import passport from "passport";
 
 //module need to setup env file
 import { config } from "dotenv";
-import passport from "passport";
 config({
   path:"./config.env"
 })
