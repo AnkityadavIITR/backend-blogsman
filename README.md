@@ -20,12 +20,12 @@ Install server dependencies:
 npm install
 # Configure the application:
 Create a .env file in the server directory and add your MongoDB connection URI and a secret key for JWT authentication.
-MONGO_URI=your_mongodb_ur,
-JWT_SECRET=your_secret_key,
-FRONT_END_URI,
-NODE_ENV,
-CLOUDINARY_NAME,
-CLOUDINARY_API_KEY,
-CLOUDINARY_SECRET,
-PORT
+  MONGO_URI=your_mongodb_ur,
+  JWT_SECRET=your_secret_key,
+  FRONT_END_URI,
+  NODE_ENV,
+  CLOUDINARY_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_SECRET,
+  PORT
 
