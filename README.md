@@ -1,7 +1,7 @@
 # backend-blogsman
 Welcome to the MERNs Blogging Platform,
 a full-stack web application that allows users to create, share, and explore blogs with authentication. 
-This project is built using the MERN stack (MongoDB, Express, React, Node.js, and Redux) to provide a seamless and responsive blogging experience.
+This project is built using the MERN stack (MongoDB, Express, React, Node.js) to provide a seamless and responsive blogging experience.
 
 # Features
 User Authentication: Secure user registration and login functionality with encrypted passwords.
