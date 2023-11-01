@@ -96,3 +96,19 @@ export const getUserProfile=async(req,res)=>{
         user:userWithPosts
     })
 }
+
+export const getUser=async(req,res)=>{
+    const id=req.params.id;
+    try{
+        const response=await User.findById(id).populate('posts');
+        res.status(302).json({
+            success:true,
+            user:response
+        })
+    }catch(e){
+        res.status(404).json({
+            success:false,
+            message:"can't get user"
+        })
+    }
+}

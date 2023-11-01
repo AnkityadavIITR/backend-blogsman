@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import { isAuthanticated } from "../middleware/auth.js";
-import { addNewUser, getUserProfile, logUser, logout } from "../controller/user.js";
+import { addNewUser, getUserProfile, logUser, logout, getUser } from "../controller/user.js";
 import singleUpload from "../middleware/multer.js";
 
 config({
@@ -26,7 +26,9 @@ router.post("/login",logUser);
 //user profile
 router.get("/me", isAuthanticated , getUserProfile);
 
-router.get("/logout",isAuthanticated,logout)
+router.get("/logout",isAuthanticated,logout);
+
+router.get("/:id",isAuthanticated , getUser);
 
 
 
