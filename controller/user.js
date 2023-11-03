@@ -101,7 +101,7 @@ export const getUser=async(req,res)=>{
     const id=req.params.id;
     try{
         const response=await User.findById(id).populate('posts');
-        res.status(302).json({
+        res.status(200).json({
             success:true,
             user:response
         })
