@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { isAuthanticated } from "../middleware/auth.js";
-import { addPost, deletePost, getAllPost, getPostById, patchPost,likePost,dislikePost } from "../controller/post.js";
+import { addPost, deletePost, getAllPost, getPostById, patchPost,likePost,dislikePost ,addComment ,getComment ,postSubcomments } from "../controller/post.js";
 import singleUpload from "../middleware/multer.js";
 
 const router=express.Router();
@@ -26,6 +26,15 @@ router.post("/:id/like" , isAuthanticated, likePost)
 
 //dislike the post
 router.post("/:id/dislike" , isAuthanticated, dislikePost)
+
+//comment the post
+router.post("/:id/addComment", isAuthanticated , addComment);
+
+//fetch the comment
+router.get("/:id/comments", isAuthanticated, getComment);
+
+//post sub comments
+router.post("/:commentid/comment",isAuthanticated, postSubcomments);
   
   
 //CHALLENGE 4: PATCH a post when you just want to update one parameter

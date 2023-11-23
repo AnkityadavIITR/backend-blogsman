@@ -2,6 +2,8 @@ import Post from "../models/post.js";
 import User from "../models/user.js";
 import { getDataUri } from "../utils/dataUri.js";
 import {v2 as cloudinary} from "cloudinary"
+import Comments from "../models/comment.js";
+import Subcomment from "../models/subcomment.js";
 
 export const getAllPost=async (req,res)=>{
 
@@ -122,15 +124,18 @@ export const getPostById=async(req,res)=>{
       const user = req.user;
       const postId = req.params.id;
       // Find the post by its ID and add the user to the 'likes' array
-      const updatedPost = await Post.findByIdAndUpdate(
-        postId,
-        { $push: { likes: user._id } },
-        { new: true }
-      );
-  
-      if (!updatedPost) {
+      const post = await Post.findById(postId);
+
+      if (!post) {
         return res.status(404).json({ error: 'Post not found' });
       }
+
+      if (post.likes.includes(user._id)) {
+        return res.status(400).json({ error: 'User has already liked this post' });
+      }
+      
+      post.likes.push(user._id);
+      const updatedPost = await post.save();
   
       res.status(200).json(updatedPost);
     } catch (err) {
@@ -161,3 +166,79 @@ export const getPostById=async(req,res)=>{
       res.status(500).json({ error: 'Error while adding a like.' });
     }
   }
+
+  //get comments
+  export const getComment=async(req,res)=>{
+    const postId=req.params.id;
+    try{
+      const response = await Comments.find({post:postId})
+      .populate("user") // Populate the "user" field
+      .populate({
+        path: "subcomments",
+        populate: {
+          path: "user",
+        },
+      })
+      console.log(response);
+        res.status(200).json({
+          success:true,
+          response
+        })
+    }catch(e){
+      console.log(e);
+      res.status(500).json({
+        success:false,
+        message:"can't get comments."
+      })
+    }
+  }
+
+  //post comments
+  export const addComment=async(req,res)=>{
+    const postId=req.params.id;
+    const user=req.user;
+    const comment=req.body.comment;
+
+    try{
+      await Comments.create({
+        comment,
+        post:postId,
+        user:user._id,
+        author:user.name
+      })
+      res.status(201).json({
+        success:true,
+        message:"added comment"
+      })
+    }catch(e){
+      console.log(e);
+      res.status(500).json({
+        success:false,
+        message:"can't add comments."
+      })
+    }
+  }
+
+  //post subcomments
+  export const postSubcomments=async(req,res)=>{
+    const commentID=req.params.commentid;
+    console.log(commentID);
+    try{
+      await Subcomment.create({
+        subcomment:req.body.subcomment,
+        user:req.user._id,
+        comment:commentID
+      })
+      res.status(201).json({
+        success:true,
+        message:"added the subcomment"
+      })
+    }catch(e){
+      console.log(e);
+      res.status(500).json({
+        success:false,
+        message:"can't reply on comment"
+      })
+    }
+  }
+  
